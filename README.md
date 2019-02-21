@@ -26,7 +26,7 @@ Tested on Arch Linux, Gnome-Builder Nightly, (3.31.9)
 
 # Future work:
  * It is inteded that Gnome-Builder will allow reading of **clang** `compile_commands.json` from within python in the future, and as such this plugin will pass that information into Gnome-Builder.
- * Projects that use Gnome-Builder with this plugin in future will need to include: `clang_compiliation_database.py` in their `wscript` in order to use code completion / search inside Builder
+ * Projects that use Gnome-Builder with this plugin in future will need to include: `clang_compiliation_database.py` in their `wscript` (or compiled Waf archive) in order to use code completion / search inside Builder
  
 # Waf Clang Compilation Database info:
 Add `clang_compilation_database.py` inside root directory of Waf project (if not already built into the projects `waf` archive), and call it within the `wscript` like so:
