@@ -1,6 +1,6 @@
 [Plugin]
-Authors=Alex Mitchell
-Copyright=Copyright © 2019 Alex Mitchell
+Authors=
+Copyright=
 Description=Provides integration with the Waf build system
 Hidden=true
 Loader=python3
