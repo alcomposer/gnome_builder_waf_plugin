@@ -1,0 +1,8 @@
+[Plugin]
+Authors=alex
+Copyright=Copyright © 2019 Alex Mitchell
+Description=Provides integration with the Waf build system
+Loader=python3
+Module=waf_plugin
+Name=Waf
+X-Builder-ABI=3.31
