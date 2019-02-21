@@ -40,3 +40,7 @@ After the build process is complete, the compilation database will be written to
 (above information & link for `clang_compiliation_database.py`)
 https://gitlab.com/ita1024/waf/blob/master/waflib/extras/clang_compilation_database.py
 
+# Credit
+Thanks to the Builder community, and Christian Hergert for the `cargo.plugin`, which 99.99 of this plugin is based on: https://gitlab.gnome.org/GNOME/gnome-builder/tree/master/src/plugins/cargo
+
+
