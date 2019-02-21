@@ -19,7 +19,7 @@ Place both `waf_plugin.py` & `waf_plugin.plugin` into `~/.local/share/gnome-buil
 Tested on Arch Linux, Gnome-Builder Nightly, (3.31.9) 
 
 # Current Issues:
-* The plugin needs Gnome-Builder Nightly due to using `SimpleBuildSystemDiscovery`, which IIRC is not preset in older Builder versions.
+* The plugin needs Gnome-Builder Nightly due to using `Ide.SimpleBuildSystemDiscovery`, which IIRC is not preset in older Builder versions.
 * Currently, Python2 is hard-coded (probably best to change this)
 * Does not allow reading of `clang compilation database` yet, but it is intended
 * Probably many many things that need to be added
