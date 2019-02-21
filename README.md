@@ -3,6 +3,7 @@
 This project is to allow the building of Waf projects using Gnome Builder. Specifically for the Ardour project. 
 
 Currently it can:
+* Identify if project uses Waf build system
 * Configure
 * Build 
 * Clean
