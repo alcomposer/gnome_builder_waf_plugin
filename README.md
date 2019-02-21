@@ -20,6 +20,8 @@ Tested on Arch Linux, Gnome-Builder Nightly, (3.31.9)
 # Current Issues:
 * The plugin needs Gnome-Builder Nightly due to using `SimpleBuildSystemDiscovery`, which IIRC is not preset in older Builder versions.
 * Currently, Python2 is hard-coded (probably best to change this)
+* Does not allow reading of `clang compilation database` yet, but it is intended
+* Probably many many things that need to be added
 
 # Future work:
  * It is inteded that Gnome-Builder will allow reading of **clang** `compile_commands.json` from within python in the future, and as such this plugin will read pass that information into Gnome-Builder.
