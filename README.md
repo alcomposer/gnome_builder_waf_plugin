@@ -29,7 +29,7 @@ Tested on Arch Linux, Gnome-Builder Nightly, (3.31.9)
  * Projects that use Gnome-Builder with this plugin in future will need to include: `clang_compiliation_database.py` in their `wscript` in order to use code completion / search inside Builder
  
 # Waf Clang Compilation Database info:
-Add `clang_compilation_database.py` inside root directoy of Waf project (if not already built into the projects `waf` archive), and call it within the `wscript` like so:
+Add `clang_compilation_database.py` inside root directory of Waf project (if not already built into the projects `waf` archive), and call it within the `wscript` like so:
 ```python
 def configure(conf):
         conf.load('compiler_cxx')
@@ -44,7 +44,5 @@ https://gitlab.com/ita1024/waf/blob/master/waflib/extras/clang_compilation_datab
 # Credit
 Thanks to the Builder community, and Christian Hergert for the `cargo.plugin`, which 99.99 of this plugin is based on: https://gitlab.gnome.org/GNOME/gnome-builder/tree/master/src/plugins/cargo
 
-I also found the information from **wonky.computer** very helpful:
+I also found the tutorial from **wonky.computer** very helpful:
 https://wonky.computer/post/gnome-builder-plugins/
-
-
