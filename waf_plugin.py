@@ -10,8 +10,6 @@ from gi.repository import GObject
 
 _ = Ide.gettext
 
-_WAF = 'waf'
-
 class WafBuildSystemDiscovery(Ide.SimpleBuildSystemDiscovery):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
