@@ -29,6 +29,11 @@ from gi.repository import GObject
 
 _ = Ide.gettext
 
+def python_if_local(self, launcher):
+    if self.waf_local:
+        launcher.push_argv(self.python)
+    else:
+        pass
 
 def sniff_python_version(path):
     """
@@ -52,9 +57,11 @@ class WafBuildSystemDiscovery(Ide.SimpleBuildSystemDiscovery):
 
 class WafBuildSystem(Ide.Object, Ide.BuildSystem):
     project_file = GObject.Property(type=Gio.File)
+    python = None
+    waf_local = None
 
     def do_get_id(self):
-        return 'wscript'
+        return 'waf'
 
     def do_get_display_name(self):
         return 'Waf'
@@ -68,6 +75,7 @@ class WafPipelineAddin(Ide.Object, Ide.PipelineAddin):
     stages and attaching them to phases of the build pipeline.
     """
     python = None
+    waf_local = None
 
     def do_load(self, pipeline):
         context = self.get_context()
@@ -83,36 +91,38 @@ class WafPipelineAddin(Ide.Object, Ide.PipelineAddin):
         waf = os.path.join(srcdir, 'waf')
         self.python = sniff_python_version(waf)
 
-        # If waf is in prject directory use that
+        # If waf is in project directory use that
         self.waf_local = os.path.isfile(waf)
 
         # Avoid sniffing again later in targets provider
         build_system.python = self.python
+        build_system.waf_local = self.waf_local
 
         # Launcher for project configuration
         config_launcher = pipeline.create_launcher()
         config_launcher.set_cwd(srcdir)
-        if self.waf_local:
-            config_launcher.push_argv(self.python)
+        python_if_local(self, config_launcher)
         config_launcher.push_argv('waf')
         config_launcher.push_argv('configure')
         config_launcher.push_argv('--prefix=%s' % config.get_prefix())
         if config_opts:
-            config_launcher.push_args(config_opts)
+            try:
+                ret, argv = GLib.shell_parse_argv(config_opts)
+                config_launcher.push_args(argv)
+            except Exception as ex:
+                print(repr(ex))
         self.track(pipeline.attach_launcher(Ide.PipelinePhase.CONFIGURE, 0, config_launcher))
 
         # Now create our launcher to build the project
         build_launcher = pipeline.create_launcher()
         build_launcher.set_cwd(srcdir)
-        if self.waf_local:
-            build_launcher.push_argv(self.python)
+        python_if_local(self, build_launcher)
         build_launcher.push_argv('waf')
         build_launcher.push_argv('build')
 
         clean_launcher = pipeline.create_launcher()
         clean_launcher.set_cwd(srcdir)
-        if self.waf_local:
-            clean_launcher.push_argv(self.python)
+        python_if_local(self, clean_launcher)
         clean_launcher.push_argv('waf')
         clean_launcher.push_argv('clean')
 
@@ -124,8 +134,7 @@ class WafPipelineAddin(Ide.Object, Ide.PipelineAddin):
 
         install_launcher = pipeline.create_launcher()
         install_launcher.set_cwd(srcdir)
-        if self.waf_local:
-            install_launcher.push_argv(self.python)
+        python_if_local(self, install_launcher)
         install_launcher.push_argv('waf')
         install_launcher.push_argv('install')
 
@@ -207,8 +216,7 @@ class WafBuildTargetProvider(Ide.Object, Ide.BuildTargetProvider):
         launcher = pipeline.create_launcher()
         launcher.set_flags(Gio.SubprocessFlags.STDOUT_SILENCE | Gio.SubprocessFlags.STDERR_PIPE)
         launcher.set_cwd(pipeline.get_srcdir())
-        if build_system.waf_local:
-            launcher.push_argv(build_system.python)
+        python_if_local(build_system, launcher)
         launcher.push_argv('waf')
         launcher.push_argv('list')
 
