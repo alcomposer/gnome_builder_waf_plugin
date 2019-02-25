@@ -14,6 +14,13 @@ https://www.ardour.org
 
 https://waf.io/
 
+# Status:
+Temp branch has moved to: https://gitlab.gnome.org/alex.w.mitchell/gnome-builder/tree/waf-plugin
+Master upstream: https://gitlab.gnome.org/GNOME/gnome-builder
+
+I will leave this here mainly for the **readme**. 
+
+
 # Use:
 Place both `waf_plugin.py` & `waf_plugin.plugin` into `~/.local/share/gnome-builder/plugins`. If the directory does not exist create it.
 Tested on Arch Linux, Gnome-Builder Nightly, (3.31.9) 
