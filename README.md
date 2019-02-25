@@ -18,7 +18,7 @@ https://waf.io/
 Temp branch has moved to: https://gitlab.gnome.org/alex.w.mitchell/gnome-builder/tree/waf-plugin
 Master upstream: https://gitlab.gnome.org/GNOME/gnome-builder
 
-I will leave this here mainly for the **readme**. 
+I will leave the repository here mainly for this **readme**. 
 
 
 # Use:
